@@ -1,3 +1,3 @@
 package com.arivera.parcialiipdm.data.modelo
 
-val videogames = mutableListOf<VideoGameModel>()
+val videogames = mutableListOf<VideogameModel>()

@@ -1,9 +1,9 @@
 package com.arivera.parcialiipdm.repository
 
-import com.arivera.parcialiipdm.data.modelo.VideoGameModel
+import com.arivera.parcialiipdm.data.modelo.VideogameModel
 
-class VideogameRepository(private val videogameList: MutableList<VideoGameModel>) {
+class VideogameRepository(private val videogameList: MutableList<VideogameModel>) {
     fun getVideogames() = videogameList
 
-    fun addNewVideogame(videogame: VideoGameModel) = videogameList.add(videogame)
+    fun addNewVideogame(videogame: VideogameModel) = videogameList.add(videogame)
 }

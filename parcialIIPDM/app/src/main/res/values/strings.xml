@@ -6,4 +6,5 @@
     <string name="fabbutton">fabButton</string>
     <string name="nombre">Nombre</string>
     <string name="genero">Genero</string>
+    <string name="agregar">Agregar</string>
 </resources>

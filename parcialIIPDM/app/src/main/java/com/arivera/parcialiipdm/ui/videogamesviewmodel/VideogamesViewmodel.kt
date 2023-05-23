@@ -1,4 +1,4 @@
-package com.arivera.parcialiipdm.ui.videogameslist.videogamesviewmodel
+package com.arivera.parcialiipdm.ui.videogamesviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.arivera.parcialiipdm.VideogamesReviewerApplication
-import com.arivera.parcialiipdm.data.modelo.VideoGameModel
+import com.arivera.parcialiipdm.data.modelo.VideogameModel
 import com.arivera.parcialiipdm.repository.VideogameRepository
-import java.lang.invoke.WrongMethodTypeException
 
 class VideogamesViewmodel(private val videogamesRepository: VideogameRepository): ViewModel() {
     val name = MutableLiveData("")
@@ -17,14 +16,14 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
 
     fun createNewVideogame() {
         if (!dataValidation()) {
+            clearData()
             status.value = WRONG_INFORMATION
         }
 
-        val newVideogame = VideoGameModel(name.value!!, genre.value!!)
+        val newVideogame = VideogameModel(name.value!!, genre.value!!)
         videogamesRepository.addNewVideogame(newVideogame)
 
         clearData()
-
         status.value = CREATED
     }
 
@@ -33,7 +32,6 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
             name.value.isNullOrEmpty() -> return false
             genre.value.isNullOrEmpty() -> return false
         }
-
         return true
     }
 
@@ -45,7 +43,6 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
     fun clearStatus() {
         status.value = INACTIVE
     }
-
 
     fun getVideogames() = videogamesRepository.getVideogames()
 
@@ -59,5 +56,10 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
         const val CREATED = "New videogame created"
         const val WRONG_INFORMATION = "Wrong information"
         const val INACTIVE  = "Inactive"
+    }
+
+    fun setSelectedItemData(videogame: VideogameModel) {
+        name.value = videogame.name
+        genre.value = videogame.genre
     }
 }
