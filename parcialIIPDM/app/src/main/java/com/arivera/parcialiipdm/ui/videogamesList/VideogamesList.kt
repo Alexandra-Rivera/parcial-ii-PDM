@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arivera.parcialiipdm.R
 import com.arivera.parcialiipdm.data.modelo.VideogameModel
+import com.arivera.parcialiipdm.data.modelo.videogames
 import com.arivera.parcialiipdm.databinding.FragmentVideogamesListBinding
+import com.arivera.parcialiipdm.ui.videogamesList.videogamesrecyclerview.VideogamesRecyclerViewAdapter
 import com.arivera.parcialiipdm.ui.videogamesviewmodel.VideogamesViewmodel
 
 class VideogamesList : Fragment() {
@@ -19,7 +22,7 @@ class VideogamesList : Fragment() {
     private val videogameViewModel: VideogamesViewmodel by activityViewModels {
         VideogamesViewmodel.Factory
     }
-    private lateinit var adapter: Adapter
+    private lateinit var adapter: VideogamesRecyclerViewAdapter
     private lateinit var binding: FragmentVideogamesListBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,22 +34,29 @@ class VideogamesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setRecyclerview(view)
         binding.addNewVideogamefabButton.setOnClickListener{
             it.findNavController().navigate(R.id.action_videogamesList_to_newVideogames)
         }
     }
 
-    fun showSelectedItem(videogame: VideogameModel) {
+    private fun showSelectedItem(videogame: VideogameModel) {
         videogameViewModel.setSelectedItemData(videogame)
+        findNavController().navigate(R.id.action_videogamesList_to_videogamesInformation)
     }
 
-    fun displayVideogames() {
-
+    private fun displayVideogames() {
+        adapter.setData(videogameViewModel.getVideogames())
+        adapter.notifyDataSetChanged()
     }
 
-    fun setRecyclerview() {
-        binding.videogamesRecyclerview.layoutManager = LinearLayoutManager(context)
+    private fun setRecyclerview(view: View) {
+        binding.videogamesRecyclerview.layoutManager = LinearLayoutManager(view.context)
+          adapter = VideogamesRecyclerViewAdapter { selectedVideogame ->
+             showSelectedItem(selectedVideogame)
+          }
 
+        binding.videogamesRecyclerview.adapter = adapter
+        displayVideogames()
     }
 }

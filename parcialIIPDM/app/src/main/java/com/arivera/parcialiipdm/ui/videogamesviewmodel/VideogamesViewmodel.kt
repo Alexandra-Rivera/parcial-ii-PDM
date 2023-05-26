@@ -14,14 +14,17 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
     val genre = MutableLiveData("")
     val status = MutableLiveData("")
 
+    private fun addVideogames(newVideogame: VideogameModel) = videogamesRepository.addNewVideogame(newVideogame)
+
     fun createNewVideogame() {
         if (!dataValidation()) {
-            clearData()
             status.value = WRONG_INFORMATION
+            return
         }
 
         val newVideogame = VideogameModel(name.value!!, genre.value!!)
-        videogamesRepository.addNewVideogame(newVideogame)
+
+        addVideogames(newVideogame)
 
         clearData()
         status.value = CREATED
@@ -35,7 +38,7 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
         return true
     }
 
-    fun clearData() {
+    private fun clearData() {
         name.value = ""
         genre.value = ""
     }
@@ -55,7 +58,7 @@ class VideogamesViewmodel(private val videogamesRepository: VideogameRepository)
         }
         const val CREATED = "New videogame created"
         const val WRONG_INFORMATION = "Wrong information"
-        const val INACTIVE  = "Inactive"
+        const val INACTIVE  = ""
     }
 
     fun setSelectedItemData(videogame: VideogameModel) {

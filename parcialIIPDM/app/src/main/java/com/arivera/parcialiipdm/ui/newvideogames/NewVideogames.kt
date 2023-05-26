@@ -42,17 +42,17 @@ class NewVideogames : Fragment() {
     private fun statusObserver() {
         videogamesViewmodel.status.observe(viewLifecycleOwner){ status ->
             when {
+                status.equals(VideogamesViewmodel.WRONG_INFORMATION) -> {
+                    Log.d(APP_TAG, status)
+                    videogamesViewmodel.clearStatus()
+                }
+
                 status.equals(VideogamesViewmodel.CREATED) -> {
                     Log.d(APP_TAG, status)
                     Log.d(APP_TAG, videogamesViewmodel.getVideogames().toString())
 
                     videogamesViewmodel.clearStatus()
                     findNavController().popBackStack()
-                }
-
-                status.equals(VideogamesViewmodel.WRONG_INFORMATION) -> {
-                    Log.d(APP_TAG, status)
-                    videogamesViewmodel.clearStatus()
                 }
             }
         }

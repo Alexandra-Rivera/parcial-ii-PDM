@@ -21,7 +21,11 @@
         android:id="@+id/videogamesInformation"
         android:name="com.arivera.parcialiipdm.ui.VideogamesInformation"
         android:label="fragment_videogames_information"
-        tools:layout="@layout/fragment_videogames_information" />
+        tools:layout="@layout/fragment_videogames_information" >
+        <action
+            android:id="@+id/action_videogamesInformation_to_videogamesList"
+            app:destination="@id/videogamesList" />
+    </fragment>
     <fragment
         android:id="@+id/newVideogames"
         android:name="com.arivera.parcialiipdm.ui.newvideogames.NewVideogames"

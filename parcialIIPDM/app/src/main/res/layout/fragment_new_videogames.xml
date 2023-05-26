@@ -27,10 +27,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text=""
+                android:text="@string/new_videogame"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                android:textColor="@color/mainTitleFragment2Color"
+                android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="25dp"
@@ -46,6 +46,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/videogameName"
+                    android:text="@={viewmodel.name}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -64,6 +65,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/videogameGenre"
+                    android:text="@={viewmodel.genre}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"

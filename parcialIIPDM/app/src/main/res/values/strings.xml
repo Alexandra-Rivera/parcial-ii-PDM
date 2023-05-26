@@ -7,4 +7,6 @@
     <string name="nombre">Nombre</string>
     <string name="genero">Genero</string>
     <string name="agregar">Agregar</string>
+    <string name="new_videogame">New videogame</string>
+    <string name="beforenavigatebutton">beforeNavigateButton</string>
 </resources>
